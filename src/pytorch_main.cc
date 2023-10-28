@@ -17,7 +17,9 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
+  torch::NoGradGuard no_grad;
   model.to(device);
+  // Disable any dropout or BN layers
   model.eval();
 
   // Example input tensor
@@ -26,7 +28,6 @@ int main(int argc, char *argv[]) {
   inputs.push_back(tensor);
 
   auto output = model.forward(inputs).toTensor();
+  std::cout<<"Ran inference on sample input\n";
   std::cout<<output.slice(1, 0, 5)<<"\n";
-
-  std::cout<<"Ok\n";
 }

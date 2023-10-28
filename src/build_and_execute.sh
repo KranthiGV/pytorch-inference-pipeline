@@ -7,7 +7,7 @@ current_dir=$(pwd)
 cd $current_dir/src
 
 # Run the python script to generate the torchscript model
-# python model_generation_main.py
+python model_generation_main.py
 
 # Build and execute pytorch_main.cc
 rm -rf build && mkdir build && cd build
