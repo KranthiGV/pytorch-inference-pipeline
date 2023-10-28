@@ -4,13 +4,17 @@
 #include <torch/script.h>
 
 int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    std::cerr << "Usage: pytorch_main <path-to-exported-script-module>\n";
+    return -1;
+  }
+
   // Run on CPU
   torch::Device device(torch::kCPU);
 
   torch::jit::script::Module model;
   try {
-    // Should read the path from a config file instead of hardcoding
-    model = torch::jit::load("./../resnet18_model.pt");
+    model = torch::jit::load(argv[1]);
   }
   catch (const c10::Error& e) {
     std::cerr << "Error loading the model\n";
