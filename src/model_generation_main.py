@@ -13,6 +13,7 @@ class TestModel(torch.nn.Module):
 
 def main() -> None:
     model = TestModel()
+    model.eval()
 
     example_input = torch.rand(1, 3, 224, 224)
     model_traced = torch.jit.trace(model, example_input)
